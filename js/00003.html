@@ -35,16 +35,20 @@
     .then(()=>sleep(3000))
     .then(()=>console.log('3秒経ったよ!!'))
     .then(()=>sleep(1500))
+    //エラー処理まで飛んでくれる。
     .then(()=>{
         throw new Error('無理やりエラー')
     })
+    //以下の2行は出力されない
     .then(()=>console.log('1.5秒経ったよ!!'))
     .then(()=>sleep(2000))
+    //エラー処理
     .catch((e)=>{
         console.log('エラー起きたよ');
         console.log(e);
-    });
-
+    })
+    .then(()=>console.log('続けるよ!!'));
+    
     //順番に処理が実行される
     fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
     .then(r => console.log(r))
