@@ -35,9 +35,15 @@
     .then(()=>sleep(3000))
     .then(()=>console.log('3秒経ったよ!!'))
     .then(()=>sleep(1500))
+    .then(()=>{
+        throw new Error('無理やりエラー')
+    })
     .then(()=>console.log('1.5秒経ったよ!!'))
     .then(()=>sleep(2000))
-    .then(()=>console.log('2秒経ったよ!!'));
+    .catch((e)=>{
+        console.log('エラー起きたよ');
+        console.log(e);
+    });
 
     //順番に処理が実行される
     fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
@@ -48,7 +54,7 @@
     //並列に処理が実行される
     fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
     .then(r => console.log(r))
-    
+
     fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
     .then(r => console.log(r))
     
