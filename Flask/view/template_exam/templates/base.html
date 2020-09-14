@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Flask</title>
+</head>
+<body>
+    <nav class = "navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('main') }}">Main</a>
+        <a class="navbar-brand" href="{{ url_for('load_member_list') }}">メンバー一覧</a>
+        <a class="navbar-brand" href="{{ url_for('terms_of_service') }}">利用規約</a>
+    </nav>
+    <div class="jumbotron">
+        <h1>Flaskホームページ</h1>
+    </div>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

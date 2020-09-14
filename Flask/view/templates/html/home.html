@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Home {{super()}}{% endblock %}
+{% block content %}
+<h2>{{user_info.name}}({{user_info.age}})がログインしました</h2>
+{% endblock %}

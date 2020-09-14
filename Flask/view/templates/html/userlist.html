@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}userlist{% endblock %}
+{% block content %}
+<a href="{{ url_for('index') }}">Index Page</a>
+<ul>
+    {% for user in users %}
+        <li>{{user}}</li>
+    {% endfor %}
+    </ul>
+    {% if is_login %}
+    <p>ログイン済みです</p>
+    {% else %}
+    <p>ログインしていません</p>
+    {% endif %}
+</ul>
+{% endblock %}
+
+
