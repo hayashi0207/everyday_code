@@ -1,8 +1,5 @@
 # 論理型
-
-from werkzeug.formparser import is_valid_multipart_boundary
-# 論理型
-
+# ただのif文
 is_man=True
 is_adult=False
 

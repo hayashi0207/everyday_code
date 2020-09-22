@@ -1,7 +1,4 @@
 # 文字列型
-from jinja2.filters import do_capitalize
-
-
 fruit = 'apple'
 print(fruit*10)
 

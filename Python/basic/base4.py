@@ -1,5 +1,5 @@
 # 数値
-
+# 数値計算、型出力
 value = 2**8
 print(value)
 
