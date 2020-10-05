@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise_2</title>
+</head>
+<body>
+    <h1>こっち側は使わない</h1>
+</body>
+<script>
+    // 見にくい非同期処理
+    setTimeout(function(){
+        console.log('2秒経ったよ!!');
+        setTimeout(function(){
+            console.log('3秒経ったよ!!');
+            setTimeout(function(){
+                console.log('1.5秒経ったよ!!');
+                setTimeout(function(){
+                    console.log('2.5秒経ったよ!!');
+                },2500)
+            },1500)
+        },3000)
+    },2000);
+
+    //見やすい非同期処理：Promiseを使う
+    const sleep = ms => new Promise(resolve=>setTimeout(resolve,ms));
+
+    //Promiseのいいところ、thenチェインが使える
+    //仕組み「thenを呼び出した返り値がpromise、返ってきたpromiseを用いてthenを呼ぶ」
+    sleep(2000)
+    .then(()=>console.log('2秒経ったよ!!'))
+    .then(()=>sleep(1500))
+    .then(()=>console.log('1.5秒経ったよ!!'))
+    .then(()=>sleep(3000))
+    .then(()=>console.log('3秒経ったよ!!'))
+    .then(()=>sleep(1500))
+    //エラー処理まで飛んでくれる。
+    .then(()=>{
+        throw new Error('無理やりエラー')
+    })
+    //以下の2行は出力されない
+    .then(()=>console.log('1.5秒経ったよ!!'))
+    .then(()=>sleep(2000))
+    //エラー処理
+    .catch((e)=>{
+        console.log('エラー起きたよ');
+        console.log(e);
+    })
+    .then(()=>console.log('続けるよ!!'));
+    
+    //順番に処理が実行される
+    fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
+    .then(r => console.log(r))
+    .then(_ => fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10'))
+    .then(r => console.log(r));
+
+    //並列に処理が実行される
+    fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
+    .then(r => console.log(r))
+
+    fetch('https://api.jikan.moe/v3/search/anime?q=Kimetus&kimit=10')
+    .then(r => console.log(r))
+    
+</script>
+</html>
